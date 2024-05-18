@@ -13,6 +13,21 @@
         android:theme="@style/Theme.Motion_EX_List"
         tools:targetApi="31">
         <activity
+            android:name=".ui.Step5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Step4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Step3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Step2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Step1Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,20 +1,96 @@
 package com.example.motion_ex_list
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.motion_ex_list.ui.Step1Activity
+import com.example.motion_ex_list.ui.Step2Activity
+import com.example.motion_ex_list.ui.Step3Activity
+import com.example.motion_ex_list.ui.Step4Activity
+import com.example.motion_ex_list.ui.Step5Activity
+import kotlin.reflect.KClass
+
+data class Step(
+    val number: String,
+    val name: String,
+    val caption: String,
+    val activity: KClass<out Activity>
+)
+
+private val data = listOf(
+    Step("Step 1",
+        "Animations with Motion Layout",
+        "Learn how to build a basic animation with Motion Layout. This will crash until you complete the step in the codelab.",
+        Step1Activity::class
+    ),
+    Step("Step 2",
+        "Animating based on drag events",
+        "Learn how to control animations with drag events. This will not display any animation until you complete the step in the codelab.",
+        Step2Activity::class
+    ),
+    Step("Step 3",
+        "Modifying a path",
+        "Learn how to use KeyFrames to modify a path between start and end.",
+        Step3Activity::class
+    ),
+    Step("Step 4",
+        "Building complex paths",
+        "Learn how to use KeyFrames to build complex paths through multiple KeyFrames.",
+        Step4Activity::class
+    ),
+    Step("Step 5",
+        "Changing attributes with motion",
+        "Learn how to resize and rotate views during animations.",
+        Step5Activity::class
+    )
+)
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.adapter = MainAdapter(data)
+
+    }
+}
+
+class MainAdapter(val data: List<Step>): RecyclerView.Adapter<MainViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout,parent,false)
+        return MainViewHolder(view as CardView)
+    }
+
+    override fun getItemCount(): Int = data.size
+
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        holder.bind(data[position])
+    }
+
+}
+
+class MainViewHolder(val cardView: CardView): RecyclerView.ViewHolder(cardView){
+    val header: TextView = cardView.findViewById(R.id.tv_header)
+    val description: TextView = cardView.findViewById(R.id.tv_description)
+    val caption: TextView = cardView.findViewById(R.id.tv_caption)
+
+    fun bind(step: Step){
+        header.text = step.number
+        description.text = step.name
+        caption.text = step.caption
+
+        val context = cardView.context
+        cardView.setOnClickListener {
+            val intent = Intent(context, step.activity.java)
+            context.startActivity(intent)
         }
     }
 }
