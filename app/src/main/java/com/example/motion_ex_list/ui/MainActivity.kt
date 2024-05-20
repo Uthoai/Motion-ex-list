@@ -1,4 +1,4 @@
-package com.example.motion_ex_list
+package com.example.motion_ex_list.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -6,15 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.motion_ex_list.ui.Step1Activity
-import com.example.motion_ex_list.ui.Step2Activity
-import com.example.motion_ex_list.ui.Step3Activity
-import com.example.motion_ex_list.ui.Step4Activity
-import com.example.motion_ex_list.ui.Step5Activity
+import com.example.motion_ex_list.R
 import kotlin.reflect.KClass
 
 data class Step(
