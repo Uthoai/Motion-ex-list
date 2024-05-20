@@ -44,6 +44,21 @@ private val data = listOf(
         "Changing attributes with motion",
         "Learn how to resize and rotate views during animations.",
         Step5Activity::class
+    ),
+    Step("Step 6",
+        "Changing custom attributes",
+        "Learn how to change custom attributes during motion.",
+        Step6Activity::class
+    ),
+    Step("Step 7",
+        "OnSwipe with complex paths",
+        "Learn how to control motion through complex paths with OnSwipe.",
+        Step7Activity::class
+    ),
+    Step("Step 8",
+        "Running motion with code",
+        "Learn how to use MotionLayout to build complex collapsing toolbar animations.",
+        Step8Activity::class
     )
 )
 
